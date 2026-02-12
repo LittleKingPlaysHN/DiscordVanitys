@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vanity - Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+     <link rel="icon" type="image/png" href="/images/icon.png">
+     <meta property="og:title" content="Vanity - Dashboard" />
+  <meta property="og:description" content="Administra tus vanity links de Discord de forma rápida y sencilla desde tu panel personal." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://lynobot.wordpress.com/wp-content/uploads/2025/12/icon.png" />
+  <meta property="og:url" content="https://vanitys.vercel.app" />
+</head>
+<body>
+    <div class="container">
+        <h1>Hola <%= user.username %>!</h1>
+        <a href="/auth/logout" class="logout-btn">Cerrar sesión</a>
+
+        <h2>Tus vanity links</h2>
+        <% if (vanities.length === 0) { %>
+            <p>No tienes vanity links todavía. Crea uno usando el formulario abajo.</p>
+        <% } else { %>
+            <ul>
+                <% vanities.forEach(v => { %>
+                    <li>
+                        <a href="/<%= v.vanity %>">/<%= v.vanity %></a> → <%= v.discord_link %>
+                        <span class="status"><%= v.is_used ? "✅" : "❌" %></span>
+
+                        <form action="/dashboard/vanity/delete" method="POST" style="display:inline;">
+                            <input type="hidden" name="vanity" value="<%= v.vanity %>">
+                            <button type="submit" class="delete-btn">Eliminar</button>
+                        </form>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
+
+        <h2>Crear nuevo vanity</h2>
+        <form action="/dashboard/vanity" method="POST">
+            <input type="text" name="vanity" id="vanityInput" placeholder="Nombre del vanity" required>
+            <span id="vanityStatus" style="margin-left: 10px; font-weight: bold;"></span>
+
+            <input type="text" name="discord_link" placeholder="Link de Discord" required>
+            <button type="submit">Crear</button>
+        </form>
+    </div>
+
+    <script>
+    const input = document.getElementById("vanityInput");
+    const status = document.getElementById("vanityStatus");
+
+    let timeout;
+    input.addEventListener("input", () => {
+        clearTimeout(timeout);
+        const value = input.value.trim();
+        if (!value) {
+            status.textContent = "";
+            return;
+        }
+
+        timeout = setTimeout(async () => {
+            const res = await fetch(`/dashboard/vanity/check/${value}`);
+            const data = await res.json();
+            status.textContent = data.available ? "✅ Libre" : "❌ Ocupado";
+            status.style.color = data.available ? "green" : "red";
+        }, 300);
+    });
+    </script>
+</body>
+</html>

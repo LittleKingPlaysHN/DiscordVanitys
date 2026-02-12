@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Discord - Vanity Links</title>
+    <link rel="stylesheet" href="/css/style.css">
+     <link rel="icon" type="image/png" href="/images/icon.png">
+    <meta property="og:title" content="Vanity - links Discord" />
+  <meta property="og:description" content="Administra tus vanity links de Discord de forma rápida y sencilla desde tu panel personal." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://lynobot.wordpress.com/wp-content/uploads/2025/12/icon.png" />
+  <meta property="og:url" content="https://vanitys.vercel.app" />
+</head>
+<body>
+    <header class="header">
+        <h1>Vanity Links</h1>
+        <nav>
+            <% if (!user) { %>
+                <a href="/auth/discord" class="btn-login">Iniciar sesión con Discord</a>
+            <% } else { %>
+                <a href="/dashboard" class="btn-login">Ir al Dashboard</a>
+                <a href="/auth/logout" class="btn-logout">Cerrar sesión</a>
+            <% } %>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <h2>Crea tus vanity links de Discord de forma rápida</h2>
+            <p>Comparte tu servidor o invitaciones con links personalizados y bonitos.</p>
+            <a href="/auth/discord" class="btn-primary">Inicia sesión y crea tu primer vanity</a>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <h3>Rápido y sencillo</h3>
+                <p>Crea tu vanity link en segundos desde tu dashboard.</p>
+            </div>
+            <div class="feature">
+                <h3>Estilo profesional</h3>
+                <p>Links bonitos y fáciles de compartir con amigos o en redes.</p>
+            </div>
+            <div class="feature">
+                <h3>Gratis</h3>
+                <p>No necesitas pagar nada, solo tu cuenta de Discord.</p>
+            </div>
+        </section>
+    </main>
+<section class="pricing">
+    <h2 class="section-title">Membersias Vip</h2>
+    <div class="pricing-container">
+        <div class="price-card">
+            <h3>Básico</h3>
+            <div class="price">Gratis</div>
+            <ul>
+                <li> - 5 Vanity Link</li>
+                <li> - Redirección Instantánea</li>
+                <li> - Sin Acesso A Estadísticas</li>
+                <li> - Soporte normal</li>
+            </ul>
+            <a href="/auth/discord" class="btn-outline">Empezar ahora</a>
+        </div>
+
+        <div class="price-card featured">
+            <div class="badge">Más Popular</div>
+            <h3>Premium</h3>
+            <div class="price">$2.99<span>/mes</span></div>
+            <ul>
+                <li>- 15 Vanity Links</li>
+                <li>- Estadísticas de clics</li>
+                <li>- Alias personalizados</li>
+                <li>- Soporte 24/7</li>
+            </ul>
+            <a href="#" class="btn-primary">Empezar ahora</a>
+        </div>
+
+        <div class="price-card">
+            <h3>Enterprise</h3>
+            <div class="price">$5.99<span>/mes</span></div>
+            <ul>
+                <li>- Links Ilimitados</li>
+                <li>- Soporte Directo</li>
+                <li>- Acceso ilimitado</li>
+                <li>- Insignia socios</li>
+            </ul>
+            <a href="#" class="btn-outline">Empezar ahora</a>
+        </div>
+    </div>
+</section>
+
+    <footer class="footer">
+        <p>&copy; 2025 La Realeza Studios - Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
